@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.is;
 
 public class StatusTests {
@@ -26,6 +27,18 @@ public class StatusTests {
                 .body("total", is(20));
     }
 
+    @Test
+    void checkTotalWitchStatusLogs() {
+        given()
+                .log().uri() //логи запроса
+                .get("https://selenoid.autotests.cloud/status")
+                .then()
+                .log().status() // логируется статус код
+                .log().body() // логи ответа
+                .statusCode(200) // проверяем что статус код 200
+                .body("total", is(5))
+                .body("browsers.chrome", hasKey( "128.0")); // проверка что есть версия хрома 128
+    }
 
     @Test
     void checkTotalWitchLogs() {
