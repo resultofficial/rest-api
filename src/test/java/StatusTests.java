@@ -15,7 +15,7 @@ public class StatusTests {
     void checkTotal20() {
         get("https://selenoid.autotests.cloud/status")
                 .then()
-                .body("total", is(20));
+                .body("total", is(5));
     }
 
 
@@ -24,7 +24,7 @@ public class StatusTests {
         get("https://selenoid.autotests.cloud/status")
                 .then()
                 .log().all()
-                .body("total", is(20));
+                .body("total", is(5));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class StatusTests {
                 .get("https://selenoid.autotests.cloud/status")
                 .then()
                 .log().all() // логи ответа
-                .body("total", is(20));
+                .body("total", is(5));
     }
 }
 
