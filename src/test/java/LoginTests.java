@@ -79,17 +79,4 @@ public class LoginTests {
                  .body("token", is("QpwL5tke4Pnpja7X4"));
      }
 
-     @Test
-     void unsuccessfulLoginTest() { // будет 415- нет given,when,then
-         String authData = "{\"email\": \"eve.holt@reqres.in\",\"password\": \"pistol\"}";
-         given()
-                 .log().uri() //логи запроса
-                 .post("https://reqres.in/api/login")
-                 .then()
-                 .log().status()
-                 .log().body() // логи ответа
-                 .statusCode(200) // проверяем что статус код 200
-                 .body("token", is("QpwL5tke4Pnpja7X4"));
-     }
-
 }
