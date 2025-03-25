@@ -5,7 +5,39 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
 public class RegisterUserTests {
+    @Test
+    void CyrilliсWordsTest() { //
+        String registereuser = "{\"email\": \"Привет\",\"password\" : \"Автотесты\"}";
+        given()// Если
+                .body(registereuser)
+                .contentType(JSON)
+                .log().uri() //логи запроса
+                .when()//Когда
+                .post("https://reqres.in/api/register")
 
+                .then()//Тогда
+                .log().status()
+                .log().body() // логи ответа
+                .statusCode(400) // проверяем что статус код 400
+                .body("error",is("Note: Only defined users succeed registration"));
+        }
+
+    @Test
+    void emptyFieldsTest() { //
+        String registereuser = "{\"email\": \"\",\"password\" : \"\"}";
+        given()// Если
+                .body(registereuser)
+                .contentType(JSON)
+                .log().uri() //логи запроса
+                .when()//Когда
+                .post("https://reqres.in/api/register")
+
+                .then()//Тогда
+                .log().status()
+                .log().body() // логи ответа
+                .statusCode(400) // проверяем что статус код 400
+                .body("error",is("Missing email or username"));
+    }
 
     @Test
     void newFieldRegisterTest() { //
