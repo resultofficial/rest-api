@@ -1,3 +1,5 @@
+package tests;
+
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -19,8 +21,8 @@ public class RegisterUserTests {
                 .log().status()
                 .log().body() // логи ответа
                 .statusCode(400) // проверяем что статус код 400
-                .body("error",is("Note: Only defined users succeed registration"));
-        }
+                .body("error", is("Note: Only defined users succeed registration"));
+    }
 
     @Test
     void emptyFieldsTest() { //
@@ -36,7 +38,7 @@ public class RegisterUserTests {
                 .log().status()
                 .log().body() // логи ответа
                 .statusCode(400) // проверяем что статус код 400
-                .body("error",is("Missing email or username"));
+                .body("error", is("Missing email or username"));
     }
 
     @Test
@@ -53,7 +55,7 @@ public class RegisterUserTests {
                 .log().status()
                 .log().body() // логи ответа
                 .statusCode(400) // проверяем что статус код 400
-                .body("error",is("Missing password"));
+                .body("error", is("Missing password"));
     }
 
     @Test
@@ -70,7 +72,7 @@ public class RegisterUserTests {
                 .log().status()
                 .log().body() // логи ответа
                 .statusCode(400) // проверяем что статус код 400
-                .body("error",is("Note: Only defined users succeed registration"));
+                .body("error", is("Note: Only defined users succeed registration"));
     }
 
     @Test
@@ -87,7 +89,7 @@ public class RegisterUserTests {
                 .log().status()
                 .log().body() // логи ответа
                 .statusCode(400) // проверяем что статус код 400L
-                .body("error",is("Missing password"));
+                .body("error", is("Missing password"));
     }
 
     @Test
@@ -97,14 +99,14 @@ public class RegisterUserTests {
                 .body(registereuser)
                 .contentType(JSON)
                 .log().uri() //логи запроса
-        .when()//Когда
+                .when()//Когда
                 .post("https://reqres.in/api/register")
 
-        .then()//Тогда
+                .then()//Тогда
                 .log().status()
                 .log().body() // логи ответа
                 .statusCode(200) // проверяем что статус код 200
                 .body("id", is(4), "token"
-                        ,is("QpwL5tke4Pnpja7X4"));
+                        , is("QpwL5tke4Pnpja7X4"));
     }
 }
